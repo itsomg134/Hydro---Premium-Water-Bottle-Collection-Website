@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Egg Analyzer Banner</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #1a1a1a;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            width: 100%;
+            max-width: 1200px;
+            height: 400px;
+            border-radius: 20px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+        }
+        
+        .grid-bg {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(255,255,255,0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,255,255,0.05) 1px, transparent 1px);
+            background-size: 40px 40px;
+            animation: gridMove 20s linear infinite;
+        }
+        
+        @keyframes gridMove {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(40px, 40px); }
+        }
+        
+        .content {
+            position: relative;
+            z-index: 2;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 40px;
+            text-align: center;
+        }
+        
+        .icon-container {
+            display: flex;
+            gap: 30px;
+            margin-bottom: 30px;
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        .egg-icon {
+            width: 80px;
+            height: 100px;
+            background: linear-gradient(180deg, #fff 0%, #f0f0f0 100%);
+            border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            position: relative;
+            animation: pulse 2s ease-in-out infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        
+        .scan-line {
+            position: absolute;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, #00ff88, transparent);
+            animation: scan 2s ease-in-out infinite;
+            box-shadow: 0 0 10px #00ff88;
+        }
+        
+        @keyframes scan {
+            0% { top: 0; }
+            50% { top: 100%; }
+            100% { top: 0; }
+        }
+        
+        .xray-icon {
+            width: 80px;
+            height: 80px;
+            background: rgba(255,255,255,0.2);
+            border: 3px solid white;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 40px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+        
+        h1 {
+            font-size: 3.5em;
+            color: white;
+            font-weight: 700;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 20px rgba(0,0,0,0.3);
+            letter-spacing: 2px;
+        }
+        
+        .subtitle {
+            font-size: 1.4em;
+            color: rgba(255,255,255,0.9);
+            margin-bottom: 25px;
+            text-shadow: 1px 1px 10px rgba(0,0,0,0.3);
+        }
+        
+        .badges {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        
+        .badge {
+            background: rgba(255,255,255,0.2);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.3);
+            padding: 8px 20px;
+            border-radius: 20px;
+            color: white;
+            font-size: 0.9em;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+        }
+        
+        .badge:hover {
+            background: rgba(255,255,255,0.3);
+            transform: translateY(-2px);
+        }
+        
+        .badge-icon {
+            font-size: 1.2em;
+        }
+        
+        .particles {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+        }
+        
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: rgba(255,255,255,0.6);
+            border-radius: 50%;
+            animation: particleFloat 6s ease-in-out infinite;
+        }
+        
+        @keyframes particleFloat {
+            0%, 100% {
+                transform: translate(0, 0);
+                opacity: 0;
+            }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+        }
+        
+        .particle:nth-child(1) { left: 10%; animation-delay: 0s; }
+        .particle:nth-child(2) { left: 20%; animation-delay: 1s; }
+        .particle:nth-child(3) { left: 30%; animation-delay: 2s; }
+        .particle:nth-child(4) { left: 40%; animation-delay: 0.5s; }
+        .particle:nth-child(5) { left: 50%; animation-delay: 1.5s; }
+        .particle:nth-child(6) { left: 60%; animation-delay: 2.5s; }
+        .particle:nth-child(7) { left: 70%; animation-delay: 1.2s; }
+        .particle:nth-child(8) { left: 80%; animation-delay: 0.8s; }
+        .particle:nth-child(9) { left: 90%; animation-delay: 2.2s; }
+        
+        .download-btn {
+            margin-top: 20px;
+            padding: 12px 30px;
+            background: white;
+            color: #667eea;
+            border: none;
+            border-radius: 30px;
+            font-size: 1em;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .download-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 7px 25px rgba(0,0,0,0.4);
+        }
+        
+        .info {
+            margin-top: 30px;
+            padding: 20px;
+            background: rgba(0,0,0,0.2);
+            border-radius: 10px;
+            color: white;
+            max-width: 800px;
+        }
+        
+        .info h3 {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container" id="banner">
+        <div class="grid-bg"></div>
+        <div class="particles">
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+        </div>
+        
+        <div class="content">
+            <div class="icon-container">
+                <div class="egg-icon">
+                    <div class="scan-line"></div>
+                </div>
+                <div class="xray-icon">⚡</div>
+                <div class="egg-icon">
+                    <div class="scan-line" style="animation-delay: 1s;"></div>
+                </div>
+            </div>
+            
+            <h1>🥚 EGG ANALYZER</h1>
+            <div class="subtitle">X-Ray Technology for Protein & Yolk Analysis</div>
+            
+            <div class="badges">
+                <div class="badge">
+                    <span class="badge-icon">🔬</span>
+                    <span>Advanced Scanning</span>
+                </div>
+                <div class="badge">
+                    <span class="badge-icon">💻</span>
+                    <span>C++ Powered</span>
+                </div>
+                <div class="badge">
+                    <span class="badge-icon">📊</span>
+                    <span>Real-time Analysis</span>
+                </div>
+                <div class="badge">
+                    <span class="badge-icon">✨</span>
+                    <span>Open Source</span>
+                </div>
+            </div>
+            
+            <button class="download-btn" onclick="downloadBanner()">📥 Download Banner (1200x400)</button>
+        </div>
+    </div>
+    
+    <div class="info">
+        <h3>📸 How to Use This Banner:</h3>
+        <p><strong>1.</strong> Click the "Download Banner" button above to save as PNG<br>
+        <strong>2.</strong> Upload to your GitHub repository as <code>banner.png</code><br>
+        <strong>3.</strong> Add to your README.md: <code>![Egg Analyzer Banner](banner.png)</code><br>
+        <strong>4.</strong> Dimensions: 1200x400px (Perfect for GitHub)</p>
+    </div>
+    
+    <script>
+        function downloadBanner() {
+            // This would require html2canvas library for actual implementation
+            // For now, we'll show instructions
+            alert('To download this banner:\n\n1. Right-click on the banner\n2. Select "Save As" or take a screenshot\n3. Save as "banner.png"\n4. Upload to your GitHub repository\n\nAlternatively, use a screenshot tool to capture the banner area at 1200x400 resolution.');
+        }
+        
+        // Add more particles dynamically
+        const particlesContainer = document.querySelector('.particles');
+        for(let i = 0; i < 20; i++) {
+            const particle = document.createElement('div');
+            particle.className = 'particle';
+            particle.style.left = Math.random() * 100 + '%';
+            particle.style.animationDelay = Math.random() * 3 + 's';
+            particle.style.animationDuration = (Math.random() * 4 + 4) + 's';
+            particlesContainer.appendChild(particle);
+        }
+    </script>
+</body>
+</html>
